@@ -34,7 +34,7 @@ int main()
         ClearBackground(WHITE);
         DrawText("SquareCollect", 350, 200, 20, GRAY);
         float dt = GetFrameTime();
-        float speed = 100.0f;
+        float speed = 400.0f;
         char key;
         if (IsKeyDown(KEY_D))
             posX += speed * dt;
@@ -44,6 +44,12 @@ int main()
             posY -= speed * dt;
         if (IsKeyDown(KEY_S))
             posY += speed * dt;
+
+        if (posX < squarePosX + 20 && posX + 20 > squarePosX && posY < squarePosY + 20 && posY + 20 > squarePosY)
+        {
+            squarePosX = generatePosX();
+            squarePosY = generatePosY();
+        }
 
         DrawRectangle(posX, posY, 20, 20, GRAY);
         DrawRectangle(squarePosX, squarePosY, 20, 20, GRAY);
