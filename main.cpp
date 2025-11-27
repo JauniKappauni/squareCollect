@@ -96,7 +96,6 @@ int main()
                 countDownTime = 3.0f;
                 gameOver = false;
                 ResetGame(posX, posY, squarePosX, squarePosY, score, startTime);
-                DrawCountDown(startTime);
             }
             EndDrawing();
             continue;
