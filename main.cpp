@@ -43,6 +43,21 @@ void ResetGame(float &posX, float &posY, int &squarePosX, int &squarePosY, int &
     startTime = GetTime();
 }
 
+void DrawCountDown(float &startTime)
+{
+    countDownTime -= GetFrameTime();
+    int count = countDownTime + 1;
+
+    ClearBackground(WHITE);
+    DrawText(to_string(count).c_str(), 350, 150, 100, BLACK);
+
+    if (countDownTime <= 0)
+    {
+        isCountingDown = false;
+        startTime = GetTime();
+    }
+}
+
 int main()
 {
     float gameDuration = 10.0f;
@@ -62,15 +77,7 @@ int main()
         BeginDrawing();
         if (isCountingDown)
         {
-            countDownTime -= GetFrameTime();
-            int count = countDownTime + 1;
-            ClearBackground(WHITE);
-            DrawText(to_string(count).c_str(), 350, 150, 100, BLACK);
-            if (countDownTime <= 0)
-            {
-                isCountingDown = false;
-                startTime = GetTime();
-            }
+            DrawCountDown(startTime);
             EndDrawing();
             continue;
         }
@@ -85,8 +92,11 @@ int main()
             DrawGameOver();
             if (IsKeyPressed(KEY_ENTER))
             {
+                isCountingDown = true;
+                countDownTime = 3.0f;
                 gameOver = false;
                 ResetGame(posX, posY, squarePosX, squarePosY, score, startTime);
+                DrawCountDown(startTime);
             }
             EndDrawing();
             continue;
