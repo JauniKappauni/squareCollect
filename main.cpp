@@ -17,7 +17,7 @@ void DrawGameOver()
     DrawText("Time's up!", 300, 150, 50, RED);
     string scoreString = "Score: " + to_string(score);
     DrawText(scoreString.data(), 600, 150, 25, RED);
-    DrawText("Please restart the game", 325, 200, 25, RED);
+    DrawText("Press enter to restart", 325, 200, 25, RED);
 }
 
 int generatePosX()
@@ -28,6 +28,16 @@ int generatePosX()
 int generatePosY()
 {
     return rand() % screenHeight;
+}
+
+void ResetGame(float &posX, float &posY, int &squarePosX, int &squarePosY, int &score, float &startTime)
+{
+    posX = 20;
+    posY = 20;
+    squarePosX = generatePosX();
+    squarePosY = generatePosY();
+    score = 0;
+    startTime = GetTime();
 }
 
 int main()
@@ -53,8 +63,14 @@ int main()
         {
             gameOver = true;
         }
-        if(gameOver){
+        if (gameOver)
+        {
             DrawGameOver();
+            if (IsKeyPressed(KEY_ENTER))
+            {
+                gameOver = false;
+                ResetGame(posX, posY, squarePosX, squarePosY, score, startTime);
+            }
             EndDrawing();
             continue;
         }
