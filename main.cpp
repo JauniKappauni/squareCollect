@@ -11,6 +11,9 @@ int score = 0;
 
 bool gameOver;
 
+bool isCountingDown = true;
+float countDownTime = 3.0f;
+
 void DrawGameOver()
 {
     ClearBackground(WHITE);
@@ -57,6 +60,20 @@ int main()
     while (!WindowShouldClose())
     {
         BeginDrawing();
+        if (isCountingDown)
+        {
+            countDownTime -= GetFrameTime();
+            int count = countDownTime + 1;
+            ClearBackground(WHITE);
+            DrawText(to_string(count).c_str(), 350, 150, 100, BLACK);
+            if (countDownTime <= 0)
+            {
+                isCountingDown = false;
+                startTime = GetTime();
+            }
+            EndDrawing();
+            continue;
+        }
 
         float timeLeft = gameDuration - (GetTime() - startTime);
         if (timeLeft <= 0)
