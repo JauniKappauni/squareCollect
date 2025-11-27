@@ -21,6 +21,8 @@ int generatePosY()
 
 int main()
 {
+    float gameDuration = 10.0f;
+    float startTime = GetTime();
     srand(time(0));
     InitWindow(screenWidth, screenHeight, "SquareCollect");
     SetTargetFPS(60);
@@ -34,6 +36,12 @@ int main()
     while (!WindowShouldClose())
     {
         BeginDrawing();
+
+        float timeLeft = gameDuration - (GetTime() - startTime);
+        if (timeLeft <= 0)
+        {
+            CloseWindow();
+        }
 
         ClearBackground(WHITE);
         DrawText("SquareCollect", 350, 200, 20, GRAY);
@@ -56,10 +64,12 @@ int main()
             score++;
         }
         string str = to_string(score);
+        string str2 = to_string(timeLeft);
 
         DrawRectangle(posX, posY, 20, 20, GRAY);
         DrawRectangle(squarePosX, squarePosY, 20, 20, GRAY);
         DrawText(str.data(), 775, 10, 25, BLACK);
+        DrawText(str2.data(), 10, 10, 40, RED);
         EndDrawing();
     }
     CloseWindow();
