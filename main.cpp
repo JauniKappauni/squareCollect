@@ -9,6 +9,17 @@ const int screenHeight = 400;
 
 int score = 0;
 
+bool gameOver;
+
+void DrawGameOver()
+{
+    ClearBackground(WHITE);
+    DrawText("Time's up!", 300, 150, 50, RED);
+    string scoreString = "Score: " + to_string(score);
+    DrawText(scoreString.data(), 600, 150, 25, RED);
+    DrawText("Please restart the game", 325, 200, 25, RED);
+}
+
 int generatePosX()
 {
     return rand() % screenWidth;
@@ -40,7 +51,12 @@ int main()
         float timeLeft = gameDuration - (GetTime() - startTime);
         if (timeLeft <= 0)
         {
-            CloseWindow();
+            gameOver = true;
+        }
+        if(gameOver){
+            DrawGameOver();
+            EndDrawing();
+            continue;
         }
 
         ClearBackground(WHITE);
