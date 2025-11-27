@@ -1,9 +1,13 @@
-#include "C:\Users\grimm\Desktop\raylib-5.5_win64_mingw-w64\raylib-5.5_win64_mingw-w64\include\raylib.h"
+#include "C:\Users\Jonas\Desktop\raylib-5.5_win64_mingw-w64\raylib-5.5_win64_mingw-w64\include\raylib.h"
 #include <stdlib.h>
 #include <time.h>
+#include <string>
+using namespace std;
 
 const int screenWidth = 800;
 const int screenHeight = 400;
+
+int score = 0;
 
 int generatePosX()
 {
@@ -49,10 +53,13 @@ int main()
         {
             squarePosX = generatePosX();
             squarePosY = generatePosY();
+            score++;
         }
+        string str = to_string(score);
 
         DrawRectangle(posX, posY, 20, 20, GRAY);
         DrawRectangle(squarePosX, squarePosY, 20, 20, GRAY);
+        DrawText(str.data(), 775, 10, 25, BLACK);
         EndDrawing();
     }
     CloseWindow();
