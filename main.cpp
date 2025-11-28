@@ -65,7 +65,7 @@ void UpdateHighScore(int score, int &highScore){
 
 int main()
 {
-    float gameDuration = 10.0f;
+    int gameDuration = 10;
     float startTime = GetTime();
     srand(time(0));
     InitWindow(screenWidth, screenHeight, "SquareCollect");
@@ -87,7 +87,7 @@ int main()
             continue;
         }
 
-        float timeLeft = gameDuration - (GetTime() - startTime);
+        int timeLeft = gameDuration - (GetTime() - startTime);
         if (timeLeft <= 0)
         {
             gameOver = true;
