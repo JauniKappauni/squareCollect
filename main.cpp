@@ -8,6 +8,7 @@ const int screenWidth = 800;
 const int screenHeight = 400;
 
 int score = 0;
+int highScore = 0;
 
 bool gameOver;
 
@@ -58,6 +59,10 @@ void DrawCountDown(float &startTime)
     }
 }
 
+void UpdateHighScore(int score, int &highScore){
+    if(score > highScore) highScore = score;
+}
+
 int main()
 {
     float gameDuration = 10.0f;
@@ -86,6 +91,7 @@ int main()
         if (timeLeft <= 0)
         {
             gameOver = true;
+            UpdateHighScore(score, highScore);
         }
         if (gameOver)
         {
@@ -121,13 +127,14 @@ int main()
             squarePosY = generatePosY();
             score++;
         }
-        string str = to_string(score);
+        string str = "Score: " + to_string(score);
         string str2 = to_string(timeLeft);
-
+        string str3 = "HighScore: " + to_string(highScore);
         DrawRectangle(posX, posY, 20, 20, GRAY);
         DrawRectangle(squarePosX, squarePosY, 20, 20, GRAY);
-        DrawText(str.data(), 775, 10, 25, BLACK);
-        DrawText(str2.data(), 10, 10, 40, RED);
+        DrawText(str.data(), 10, 10, 25, BLACK);
+        DrawText(str2.data(), 10, 375, 25, RED);
+        DrawText(str3.data(), 10, 35, 25, BLACK);
         EndDrawing();
     }
     CloseWindow();
