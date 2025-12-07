@@ -1,4 +1,4 @@
-#include "C:\Users\Jonas\Desktop\raylib-5.5_win64_mingw-w64\raylib-5.5_win64_mingw-w64\include\raylib.h"
+#include "raylib.h"
 #include <stdlib.h>
 #include <time.h>
 #include <string>
